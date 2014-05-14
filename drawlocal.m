@@ -1,10 +1,10 @@
-ax = usamap(latlim,lonlim);
-states = shaperead('usastatehi',...
-        'UseGeoCoords', true, 'BoundingBox', [lonlim', latlim']);
-geoshow(ax, states, 'FaceColor', [0.5 0.5 1],'linewidth',0.1)
-S = load('wus_boundary.mat');
-plotm(S.lat,S.lon,'k');
-setm(gca,'mlabellocation',20)
-setm(gca,'plabellocation',10)
-gridm off
+ax = worldmap(lalim,lolim);
+coastdata = load('coastline_data_low');
+coast.lat = coastdata(:,2);
+coast.lon = coastdata(:,1);
+boundary_data = load('global_trenches_AV.out');
+boundary.lat = boundary_data(:,2);
+boundary.lon = boundary_data(:,1);
+plotm(coast.lat,coast.lon,'k');
+plotm(boundary.lat,boundary.lon,'b');
 

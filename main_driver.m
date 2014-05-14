@@ -4,12 +4,9 @@
 
 clear;
 
-default_value = get(0,'render');
-set(0,'render','zbuffer');
-
 % make the plot of stacked phase velocity
 disp('Making stack plots');
-plot_stack;
+plot_stack_helm;
 
 % make the station and event distribution plots
 database_summary;

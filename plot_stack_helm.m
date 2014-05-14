@@ -9,17 +9,11 @@ setup_parameters;
 r=0.08;
 datafile = fullfile(gsdfpath,'helmholtz_stack_LHZ.mat');
 
-if ~exist('pics','dir')
-	mkdir('pics');
-end
-if ~exist(fullfile('pics','stack'),'dir')
-	mkdir(fullfile('pics','stack'));
-end
 if ~exist('htmls','dir')
 	mkdir('htmls');
 end
-if ~exist(fullfile('htmls','report_files'),'dir')
-	mkdir(fullfile('htmls','report_files'));
+if ~exist(fullfile('htmls','pics'),'dir')
+	mkdir(fullfile('htmls','pics'));
 end
 
 result = load(datafile);
@@ -46,7 +40,7 @@ for ip = 1:length(result.avgphv)
 	left = sidegap + (iy-1)*(vgap+width);
 	bot = botgap + (ix-1)*(hgap+height);
 	subplot('position',[left,bot,width,height]);
-	drawusa;
+	drawlocal;
 	setm(gca,'fontsize',8);
 	pid = plot_array(ip);
     GV = result.avgphv((pid)).GV;
@@ -55,9 +49,9 @@ for ip = 1:length(result.avgphv)
 	meanphv = nanmean(GV(:));
 	caxis([meanphv*(1-r) meanphv*(1+r)])
 	colorbar
-    title(['Rayleigh Wave ',num2str(result.avgphv((pid)).period),'s  '],'fontsize',10);
+    title(['Phase Velocity: ',num2str(result.avgphv((pid)).period),'s  '],'fontsize',10);
 end
-filename = ['pics/stack/RayleighUS'];
+filename = fullfile('htmls','pics','phaseV_all');
 %export_fig(filename,'-png','-m2');
 print('-dpng','-r300',filename)
 
@@ -73,7 +67,7 @@ for ip = 1:length(result.avgphv)
 	left = sidegap + (iy-1)*(vgap+width);
 	bot = botgap + (ix-1)*(hgap+height);
 	subplot('position',[left,bot,width,height]);
-	drawusa;
+	drawlocal;
 	setm(gca,'fontsize',8);
 	pid = plot_array(ip);
 	surfacem(result.avgphv((pid)).xi,result.avgphv((pid)).yi,result.avgphv(pid).eventnum);
@@ -83,9 +77,9 @@ for ip = 1:length(result.avgphv)
 	meaneventnum = nanmedian(eventnum(:));
 	caxis([0 2*meaneventnum])
 	colorbar
-    title(['Rayleigh Eventnum ',num2str(result.avgphv((pid)).period),'s  '],'fontsize',10);
+    title(['Eventnum ',num2str(result.avgphv((pid)).period),'s  '],'fontsize',10);
 end
-filename = ['htmls/report_files/rayleigh_eventnummap'];
+filename = fullfile('htmls','pics','eventnum_all');
 %export_fig(filename,'-png','-m2');
 print('-dpng','-r300',filename)
 
@@ -96,7 +90,7 @@ for ip = 1:length(result.avgphv)
         set(gcf,'renderer','zbuffer')
 	set(gcf,'position',[150    50   600   400]);
 	set(gcf,'color',[1 1 1]);
-	drawusa;
+	drawlocal;
     GV = result.avgphv((ip)).GV;
 	surfacem(result.avgphv((ip)).xi,result.avgphv((ip)).yi,GV);
 	colormap(seiscmap)
@@ -104,8 +98,8 @@ for ip = 1:length(result.avgphv)
 	caxis([meanphv*(1-r) meanphv*(1+r)])
 %	caxis([3.6 4])
 	colorbar
-    title(['Rayleigh Wave ',num2str(result.avgphv((ip)).period),'s  '],'fontsize',15);
-	filename = ['pics/stack/rayleigh_',num2str(ip)];
+    title(['Phase Velocity ',num2str(result.avgphv((ip)).period),'s  '],'fontsize',15);
+	filename = fullfile('htmls','pics',['phaseV_',num2str(ip)]);
 	%export_fig(filename,'-png');
         print('-dpng','-r300',filename)
 end
