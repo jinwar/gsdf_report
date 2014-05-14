@@ -7,5 +7,6 @@ run(fullfile(gsdfpath,'setup_parameters.m'));
 lalim = parameters.lalim;
 lolim = parameters.lolim;
 component = parameters.component;
+periods = parameters.periods;
 
 

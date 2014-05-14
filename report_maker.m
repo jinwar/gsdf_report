@@ -33,7 +33,7 @@ fprintf(fp,'<img src="pics/station_map.png" alt="Station Map" width="500"><br>\n
 fprintf(fp,'Event map: <br>\n');
 fprintf(fp,'<img src="pics/event_map.png" alt="Event Map" width="500"><br>\n',length(helm_files));
 fprintf(fp,'Event azimuthal distribution: <br>\n');
-fprintf(fp,'<img src="pics/event_azi.png" alt="Event Map" width="500"><br>\n',length(helm_files));
+fprintf(fp,'<img src="pics/event_azi.png" alt="Event Map" width="300"><br>\n',length(helm_files));
 fprintf(fp,'</p>\n');
 
 % Love
