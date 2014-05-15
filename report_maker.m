@@ -21,7 +21,7 @@ fprintf(fp,'</p>\n');
 
 % Rayleigh
 fprintf(fp,'<h2><font size = 4>Database Summary</font></h2>\n');
-helm_files = dir(fullfile(gsdfpath,'eikonal','*LHZ.mat'));
+helm_files = dir(fullfile(gsdfpath,'eikonal',['*',component,'.mat']));
 fprintf(fp,'<p>\n');
 fprintf(fp,'Event Processed: %d<br>\n',length(helm_files));
 fprintf(fp,'Earliest Event: %s<br>\n',helm_files(1).name(1:12));

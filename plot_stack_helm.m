@@ -7,7 +7,7 @@ clear;
 setup_parameters;
 
 r=0.08;
-datafile = fullfile(gsdfpath,'helmholtz_stack_LHZ.mat');
+datafile = fullfile(gsdfpath,['helmholtz_stack_',component,'.mat']);
 
 if ~exist('htmls','dir')
 	mkdir('htmls');
