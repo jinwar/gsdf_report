@@ -43,7 +43,7 @@ for ip = 1:length(result.avgphv)
 	drawlocal;
 	setm(gca,'fontsize',8);
 	pid = plot_array(ip);
-    GV = result.avgphv((pid)).GV;
+    GV = result.avgphv((pid)).GV_cor;
 	surfacem(result.avgphv((pid)).xi,result.avgphv((pid)).yi,GV);
 	colormap(seiscmap)
 	meanphv = nanmean(GV(:));
@@ -76,7 +76,7 @@ for ip = 1:length(result.avgphv)
 	eventnum(find(eventnum==0)) = NaN;
 	meaneventnum = nanmedian(eventnum(:));
 	caxis([0 2*meaneventnum])
-	colorbar
+	ax = colorbar;
     title(['Eventnum ',num2str(result.avgphv((pid)).period),'s  '],'fontsize',10);
 end
 filename = fullfile('htmls','pics','eventnum_all');
@@ -87,18 +87,19 @@ print('-dpng','-r300',filename)
 for ip = 1:length(result.avgphv)
 	figure(88)
 	clf
-        set(gcf,'renderer','zbuffer')
+	set(gcf,'renderer','zbuffer')
 	set(gcf,'position',[150    50   600   400]);
 	set(gcf,'color',[1 1 1]);
 	drawlocal;
-    GV = result.avgphv((ip)).GV;
+    GV = result.avgphv((ip)).GV_cor;
 	surfacem(result.avgphv((ip)).xi,result.avgphv((ip)).yi,GV);
 	colormap(seiscmap)
 	meanphv = nanmean(GV(:));
 	caxis([meanphv*(1-r) meanphv*(1+r)])
 %	caxis([3.6 4])
-	colorbar
-    title(['Phase Velocity ',num2str(result.avgphv((ip)).period),'s  '],'fontsize',15);
+	ax = colorbar;
+	set(get(ax,'ylabel'),'String', ['Phase Velocity ',num2str(result.avgphv((ip)).period),'s (km/s)'],'fontsize',18);
+%    ax = title(['Phase Velocity ',num2str(result.avgphv((ip)).period),'s  '],'fontsize',18);
 	filename = fullfile('htmls','pics',['phaseV_',num2str(ip)]);
 	%export_fig(filename,'-png');
         print('-dpng','-r300',filename)
