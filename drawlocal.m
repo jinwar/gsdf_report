@@ -7,5 +7,4 @@ boundary_data = load('global_trenches_AV.out');
 boundary.lat = boundary_data(:,2);
 boundary.lon = boundary_data(:,1);
 plotm(coast.lat,coast.lon,'k','linewidth',2);
-plotm(boundary.lat,boundary.lon,'--b','linewidth',2);
-
+plotm(boundary.lat,boundary.lon,'--','linewidth',1,'color',[0.6 0.6 1]);
