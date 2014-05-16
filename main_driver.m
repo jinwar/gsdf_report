@@ -6,6 +6,8 @@ clear;
 
 % make the plot of stacked phase velocity
 disp('Making stack plots');
+% choose one
+%plot_stack_eikonal;
 plot_stack_helm;
 
 % make the station and event distribution plots

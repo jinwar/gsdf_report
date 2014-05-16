@@ -1,5 +1,6 @@
 % Script to generate html file and figures for the stacked phase velocity result
 % written by Ge Jin, jinwar@gmail.com
+% modified by Alex Hutko
 % May, 2013
 
 clear;
