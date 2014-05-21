@@ -1,6 +1,5 @@
 % Script to generate html file and figures for the stacked phase velocity result
 % written by Ge Jin, jinwar@gmail.com
-% modified by Alex Hutko
 % May, 2013
 
 clear;
@@ -51,8 +50,14 @@ for ip = 1:length(result.avgphv)
 	meanphv = nanmean(GV(:));
 	caxis([meanphv*(1-r) meanphv*(1+r)])
 	colorbar
-	title([num2str(result.avgphv((pid)).period),'s Phase Velocity'],'fontsize',10);
+	title([num2str(result.avgphv((pid)).period),'s'],'fontsize',10);
 end
+subplot('position',[0.48,0.93,0.01,0.01]);
+title('Rayleigh Phase Velocity (km/s)','HorizontalAlignment','center')
+axis off
+subplot('position',[0.97,0.94,0.01,0.01]);
+title(parameters.proj_name,'HorizontalAlignment','right')
+axis off
 filename = fullfile('htmls','pics','phaseV_all');
 print('-dpng','-r150',filename)
 
@@ -79,9 +84,15 @@ for ip = 1:length(result.avgphv)
         meaneventnum = nanmedian(eventnum(:));
         Nmax=max(max(eventnum));
         caxis([ 0 Nmax ])
-        title(['N events  ',num2str(result.avgphv((pid)).period),'s  '],'fontsize',10);
+        title([num2str(result.avgphv((pid)).period),'s '],'fontsize',10);
         ax = colorbar;
 end
+subplot('position',[0.48,0.93,0.01,0.01]);
+title('Number of events','HorizontalAlignment','center')
+axis off
+subplot('position',[0.97,0.94,0.01,0.01]);
+title(parameters.proj_name,'HorizontalAlignment','right')
+axis off
 filename = fullfile('htmls','pics','eventnum_all');
 print('-dpng','-r150',filename)
 
@@ -97,8 +108,11 @@ for ip = 1:length(result.avgphv)
 	colormap(seiscmap)
 	meanphv = nanmean(GV(:));
 	caxis([meanphv*(1-r) meanphv*(1+r)])
+        periodtxt = sprintf('%ds',result.avgphv((ip)).period);
+        title(periodtxt,'fontsize',18)
 	ax = colorbar;
-	set(get(ax,'ylabel'),'String', [num2str(result.avgphv((ip)).period),'s Phase Velocity (km/s)'],'fontsize',18);
+        set(ax,'fontsize',18);
+        set(get(ax,'ylabel'),'String','Rayleigh Phase Velocity (km/s)','fontsize',18);
 	filename = fullfile('htmls','pics',['phaseV_',num2str(ip)]);
         print('-dpng','-r150',filename)
 end

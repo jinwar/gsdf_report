@@ -7,11 +7,12 @@ setup_parameters;
 fig=figure('units','pixels','outerposition',[50 50 800 600 ],'paperpositionmode','auto');  %   left up width height
 set(gcf,'renderer','zbuffer')
 clf
-subplot('Position',[0.08 0.08 0.9 0.8 ])  %   left up width height
+subplot('Position',[0.08 0.08 0.9 0.8 ]);
 set(gcf,'color','w');
 drawlocal
 plotm(stlas,stlos,'b^','markerfacecolor','b')
 filename = fullfile('htmls','pics','station_map.png');
+title(parameters.proj_name,'fontsize',14)
 print('-dpng','-r150',filename)
 close(fig)
 
@@ -19,7 +20,7 @@ close(fig)
 fig=figure('units','pixels','outerposition',[50 50 650 600 ],'paperpositionmode','auto');  %   left up width height
 set(gcf,'renderer','zbuffer')
 clf
-subplot('Position',[0.1 0.1 0.8 0.8 ])  %   left up width height
+subplot('Position',[0.1 0.1 0.8 0.8 ]);
 clat = mean(lalim); clon = mean(lolim);
 [dists azis] = distance(clat,clon,evlas,evlos);
 h = rose(azis);
@@ -28,10 +29,14 @@ x = get(h,'Xdata');
 y = get(h,'Ydata');
 g=patch(x,y,'b');
 distxy=sqrt((x.^2)+(y.^2));
-text(-1*max(distxy)*1.35,0,'Azimuthal distribution of events','HorizontalAlignment','center')
-text(max(distxy)*1.25,max(distxy)*1.4,parameters.proj_name,'fontsize',14,'HorizontalAlignment','right','backgroundcolor','w')
 set(findall(gcf,'type','text'),'fontSize',14)
 filename = fullfile('htmls','pics','event_azi.png');
+subplot('position',[0.5,0.025,0.01,0.01]);
+axis off
+text(0,0,'Azimuthal distribution of events','HorizontalAlignment','center','fontsize',14);
+subplot('position',[0.95,0.95,0.01,0.01]);
+axis off
+text(0,0,parameters.proj_name,'fontsize',14,'HorizontalAlignment','right','backgroundcolor','w');
 print('-dpng','-r100',filename)
 close(fig)
 
@@ -39,7 +44,7 @@ close(fig)
 fig=figure('units','pixels','outerposition',[50 50 900 500 ],'paperpositionmode','auto');  %   left up width height
 set(gcf,'renderer','zbuffer')
 clf
-subplot('Position',[0.01 0.04 0.97 0.89])  %   left up width height
+subplot('Position',[0.01 0.04 0.97 0.89]);
 worldmap('world');
 mlabel('off')
 plabel('off')
